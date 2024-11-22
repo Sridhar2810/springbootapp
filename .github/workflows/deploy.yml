@@ -43,7 +43,7 @@ jobs:
       - name: Get EC2 Public IP
         id: get_ip
         run: |
-          PUBLIC_IP=$(terraform output -raw public_ip | tr -d '\r\n')       
+         # PUBLIC_IP=$(terraform output -raw public_ip | tr -d '\r\n')       
           echo "EC2_HOST=$(terraform output -raw public_ip)" >> $GITHUB_ENV
         working-directory: terraform
 

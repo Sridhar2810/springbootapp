@@ -18,7 +18,7 @@ resource "aws_instance" "hello_world_app" {
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh"
   description = "Allow SSH inbound traffic"
-  vpc_id     = var.vpc_id 
+  vpc_id     = "vpc-0abcfde67c0317c28"
 
   ingress {
     from_port   = 22

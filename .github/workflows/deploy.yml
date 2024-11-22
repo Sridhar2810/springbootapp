@@ -3,7 +3,7 @@ name: Deploy Hello World App
 on:
   push:
     branches:
-      - main
+      - mai
 
 jobs:
   build:

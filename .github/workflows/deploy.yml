@@ -21,9 +21,29 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.0.0  # Specify the Terraform version you want to use
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: terraform
+
+      - name: Terraform Apply
+        env:
+          TF_VAR_key_name: ${{ secrets.EC2_KEY_NAME }}  # Add the key name to your secrets
+        run: terraform apply -auto-approve
+        working-directory: terraform
+
+      - name: Get EC2 Public IP
+        id: get_ip
+        run: |
+          echo "EC2_HOST=$(terraform output -raw public_ip)" >> $GITHUB_ENV
+        working-directory: terraform
+
       - name: Copy JAR to EC2
         env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_KEY: ${{ secrets.EC2_KEY }}
         run: |
@@ -31,7 +51,6 @@ jobs:
 
       - name: Run the application on EC2
         env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_KEY: ${{ secrets.EC2_KEY }}
         run: |

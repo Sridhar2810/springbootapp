@@ -2,13 +2,13 @@ provider "aws" {
   region = "ap-south-1"  # Change to your desired region
 }
 
-resource "aws_instance" "hello_world_app" {
+resource "aws_instance" "hello-world-app" {
   ami           = "ami-0dee22c13ea7a9a67"  # Replace with a valid AMI ID for your region
   instance_type = "t2.micro"               # Change instance type if needed
 
   key_name      = var.key_name
 
-  security_groups = [aws_security_group.allow_ssh.name]
+  security_groups = [aws_security_group.allow_ssh.id]
 
   tags = {
     Name = "HelloWorldApp"

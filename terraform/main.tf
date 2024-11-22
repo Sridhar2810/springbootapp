@@ -15,7 +15,7 @@ resource "aws_instance" "hello_world_app" {
   }
 }
 
-resource "aws_security_group" "allow_ssh" {
+resource "aws_security_group" "allow-ssh" {
   name        = "allow_ssh_unique"
   description = "Allow SSH inbound traffic"
   vpc_id     = "vpc-0abcfde67c0317c28"

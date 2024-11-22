@@ -8,7 +8,7 @@ resource "aws_instance" "hello-world-app" {
 
   key_name      = var.key_name
 
-  security_groups = [aws_security_group.allow_ssh.id]
+  security_groups = [aws_security_group.allow-ssh.id]
 
   tags = {
     Name = "HelloWorldApp"
